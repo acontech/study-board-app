@@ -4,7 +4,7 @@
 
 - [backend README.md](https://github.com/acontech/study-board-app/blob/main/backend/README.md)
 
-- [frontend README.md](https://github.com/acontech/study-board-app/blob/main/README.md)
+- [frontend README.md](https://github.com/acontech/study-board-app/blob/main/frontend/README.md)
 
 - [기본 README.md](https://github.com/acontech/study-board-app/blob/main/README.md)
 
