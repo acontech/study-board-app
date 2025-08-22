@@ -82,7 +82,10 @@ python -m venv venv
 - Visual Studio Code 를 실행하여 board-app/backend 폴더를 오픈한다.
 
 - 하단의 터미널 > cmd 창을 실행한다.
-  
+  ```
+  venv\Scripts\activate  # venv 환경으로 변경
+  ```
+
   > 예시 : (venv) C:\kwon\acontech\board-app\backend>
   > 
   > 위 예시와 같이 (venv) 표시가 되어 있는지 확인 필요.
