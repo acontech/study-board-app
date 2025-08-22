@@ -1,0 +1,11 @@
+fastapi==0.116.1
+uvicorn[standard]==0.30.6
+SQLAlchemy==2.0.36
+asyncmy==0.2.9
+alembic==1.13.2
+
+# JWT 인증 관련
+fastapi-jwt-auth==0.5.0
+
+# 비밀번호 해싱 (bcrypt 지원)
+passlib[bcrypt]==1.7.4
