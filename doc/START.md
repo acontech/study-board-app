@@ -1,8 +1,12 @@
 ## 기본 내용 소개
 
-- 와이어프레임
+- [와이어프레임](https://github.com/acontech/study-board-app/blob/main/doc/%EC%97%85%EB%AC%B4_%EA%B2%8C%EC%8B%9C%ED%8C%90_%ED%99%94%EB%A9%B4%EB%B3%84_%EC%99%80%EC%9D%B4%EC%96%B4%ED%94%84%EB%A0%88%EC%9E%84_v_1.md)
 
-  - [study-board-app/doc/업무*게시판*화면별\_와이어프레임\_v_1.md at main · acontech/study-board-app · GitHub](https://github.com/acontech/study-board-app/blob/main/doc/%EC%97%85%EB%AC%B4_%EA%B2%8C%EC%8B%9C%ED%8C%90_%ED%99%94%EB%A9%B4%EB%B3%84_%EC%99%80%EC%9D%B4%EC%96%B4%ED%94%84%EB%A0%88%EC%9E%84_v_1.md)
+- [backend README.md](https://github.com/acontech/study-board-app/blob/main/backend/README.md)
+
+- [frontend README.md](https://github.com/acontech/study-board-app/blob/main/README.md)
+
+- [기본 README.md](https://github.com/acontech/study-board-app/blob/main/README.md)
 
 ## 프론트엔드 개발 방향
 
