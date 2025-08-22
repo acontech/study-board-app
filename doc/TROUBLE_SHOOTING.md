@@ -100,3 +100,74 @@ VS Code는 현재 열려있는 폴더의 최상위 레벨에 있는 `.vscode` �
 2.  **디버깅 실행**
     *   워크스페이스를 열면 '실행 및 디버그' 탭의 디버깅 목록이 각 폴더별로 그룹화되어 나타난다.
     *   `Python: FastAPI (backend)` 설정을 선택하고 F5를 누르면 `backend` 프로젝트의 디버깅이 정상적으로 시작된다.
+
+---
+
+## 가이드 3: 프로젝트별 디버깅 설정 (launch.json)
+
+다중 루트 워크스페이스 환경에서는 각 프로젝트(`backend`, `frontend`)가 자신만의 디버깅 설정을 가져야 합니다. 이 설정은 각 프로젝트 폴더 내의 `.vscode/launch.json` 파일에 정의합니다.
+
+### 1. 백엔드 (FastAPI) `launch.json` 설정
+
+FastAPI 서버를 디버깅하기 위한 설정입니다.
+
+-   **파일 위치**: `backend/.vscode/launch.json`
+-   **내용**:
+    ```json
+    {
+      "version": "0.2.0",
+      "configurations": [
+        {
+          "name": "Python: FastAPI",
+          "type": "python",
+          "request": "launch",
+          "module": "uvicorn",
+          "args": [
+            "app.main:app",
+            "--reload"
+          ],
+          "jinja": true,
+          "python": "C:/kwon/acontech/study-board-app/backend/venv/Scripts/python.exe"
+        }
+      ]
+    }
+    ```
+-   **설명**: `uvicorn` 모듈을 사용하여 `app.main`에 있는 `app` 인스턴스를 실행합니다.
+
+### 2. 프론트엔드 (Next.js) `launch.json` 설정
+
+Next.js의 서버 사이드와 클라이언트 사이드 코드를 모두 디버깅하기 위한 설정입니다.
+
+-   **파일 위치**: `frontend/.vscode/launch.json`
+-   **내용**:
+    ```json
+    {
+      "version": "0.2.0",
+      "configurations": [
+        {
+          "name": "Next.js: Debug Server-Side",
+          "type": "node-terminal",
+          "request": "launch",
+          "command": "npm run dev"
+        },
+        {
+          "name": "Next.js: Debug Client-Side",
+          "type": "chrome",
+          "request": "launch",
+          "url": "http://localhost:3000"
+        },
+        {
+          "name": "Next.js: Debug Full Stack",
+          "type": "node-terminal",
+          "request": "launch",
+          "command": "npm run dev",
+          "serverReadyAction": {
+            "pattern": "started server on .+, url: (https?://.+)",
+            "uriFormat": "%s",
+            "action": "debugWithChrome"
+          }
+        }
+      ]
+    }
+    ```
+-   **설명**: 서버/클라이언트/통합(Full Stack) 디버깅 모드를 제공하며, `Next.js: Debug Full Stack`을 실행하는 것이 가장 편리합니다.
