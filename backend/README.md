@@ -102,8 +102,6 @@ python -m venv venv
 uvicorn app.main:app --reload
 ```
 
-- 
-
 ## 네이밍 컨벤션
 
 | 대상                     | 스타일                           | 예시                                          |
