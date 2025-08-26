@@ -5,6 +5,9 @@ import Link from "next/link";
 import "./globals.css";
 
 import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
+import { Suspense } from "react";
+import Loading from "./loading";
 
 // CHECK : metadata 를 작성하는 이유는?
 export const metadata: Metadata = {
@@ -14,18 +17,20 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  // CHECK : Readonly 의 사용목적은?
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="ko">
-      <body className="flex flex-col min-h-screen">
+      <body className="min-h-screen flex flex-col text-gray-900">
+        {/* 헤더와 푸터를 별도 서버 컴포넌트로 작성함. */}
         <Header />
-        <main className="flex-grow container mx-auto p-4">{children}</main>
-        <footer className="text-center p-4 bg-gray-100 text-gray-500 text-sm">
-          © 2025 업무_게시판
-        </footer>
+
+        <Suspense fallback={<Loading />}>
+          <main className="flex-1 container mx-auto p-4">{children}</main>
+        </Suspense>
+
+        <Footer />
       </body>
     </html>
   );
