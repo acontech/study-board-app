@@ -10,5 +10,10 @@
       "path": "frontend"
     }
   ],
-  "settings": {}
+  "settings": {
+    "explorer.compactFolders": false,
+    "workbench.tree.indent": 15,
+    "workbench.tree.renderIndentGuides": "always", 
+    "explorer.decorations.colors": true
+  }
 }
