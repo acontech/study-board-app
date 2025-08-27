@@ -23,6 +23,17 @@
         "uriFormat": "%s",
         "action": "debugWithChrome"
       }
+    },
+    {
+      "name": "Next.js: Debug Full Stack (_debug/next-debug.log)",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "mkdir -p _debug && npm run dev 2>&1 | tee -a _debug/next-$(date +%Y%m%d-%H%M%S).log",
+      "serverReadyAction": {
+        "pattern": "started server on .+, url: (https?://.+)",
+        "uriFormat": "%s",
+        "action": "debugWithChrome"
+      }
     }
   ]
 }
