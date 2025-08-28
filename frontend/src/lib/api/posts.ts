@@ -100,24 +100,26 @@ export async function getPosts(): Promise<PostListItem[]> {
     //   cache: "no-store",
     // });
 
-    const res = new Response(null, { status: 500 }); // 임시로 항상 에러 발생 시킴.
+    // const res = new Response(null, { status: 500 }); // 임시로 항상 에러 발생 시킴.
 
-    if (!res.ok) {
-      // 응답 상태와 메세지를 인자값으로 사용하였는데
-      //  필요에 따라 특정 코드 값을 정의 하여 사용 할 수 있음.
-      throw ApiError.fromStatusAndUrl(
-        res.status,
-        "응답 오류",
-        `${process.env.API_URL}${API_ROUTES.POSTS}`
-      );
-    }
+    // if (!res.ok) {
+    //   // 응답 상태와 메세지를 인자값으로 사용하였는데
+    //   //  필요에 따라 특정 코드 값을 정의 하여 사용 할 수 있음.
+    //   throw ApiError.fromStatusAndUrl(
+    //     res.status,
+    //     "응답 오류",
+    //     `${process.env.API_URL}${API_ROUTES.POSTS}`
+    //   );
+    // }
 
-    return res.json();
+    // return res.json();
+
+    // NOTE: 임시 목업 데이터 반환
+    console.log("Returning mock posts for main page");
+    return Promise.resolve(mockPosts);
   } catch (error: unknown) {
     throw error;
   }
 
-  // NOTE: 임시 목업 데이터 반환
-  console.log("Returning mock posts for main page");
-  return Promise.resolve(mockPosts);
+  
 }
