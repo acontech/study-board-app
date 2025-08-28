@@ -8,16 +8,16 @@ import { ApiError } from "@/lib/error/api-error";
 import Link from "next/link";
 
 export default async function HomePage() {
-  // IDEA: getPosts() 는 예외를 throw 하기 때문에 이곳에서 try-catch로 처리 해야함.
+  // REVIEW: getPosts() 는 예외를 throw 하기 때문에 이곳에서 try-catch로 처리 해야함.
   let posts: PostListItem[] = [];
   let user: User | null = null;
-  let errorMessage = null;
+  let errorMessage: string | null = null;
 
   try {
     posts = await getPosts();
     user = await getCurrentUser();
   } catch (error: unknown) {
-    // IDEA: 호출자는 예외 타입에 따른 UI 처리를 한다.
+    // REVIEW: 호출자는 예외 타입에 따른 UI 처리를 한다.
     if (ApiError.isApiError(error)) {
       // 사용자에게 노출되는 메세지
       errorMessage = "데이터를 불러오는 중에 오류가 발생했습니다.";
@@ -28,6 +28,18 @@ export default async function HomePage() {
       errorMessage = "알 수 없는 오류가 발생했습니다.";
       console.log("Unexpected Error:", error);
     }
+  }
+
+  let content: React.ReactNode = null;
+
+  // REVIEW: 코드 가독성을 위해 기존 삼항 연산자를 제거.
+  if (errorMessage) {
+    // REVIEW: 작은 컴포넌트 형태로 분리 할수도 있지만 공통 UI 여부를 판단 후 나중에 분리해도 될듯.
+    content = <div className="text-red-500 mb-4">{errorMessage}</div>;
+  } else if (posts.length === 0) {
+    content = <div className="text-gray-500 mb-4">게시물이 없습니다.</div>;
+  } else {
+    content = <PostList posts={posts} />;
   }
 
   return (
@@ -43,13 +55,7 @@ export default async function HomePage() {
           </Link>
         )}
       </div>
-      {errorMessage ? (
-        <div className="text-red-500 mb-4">{errorMessage}</div>
-      ) : posts.length === 0 ? (
-        <div className="text-gray-500 mb-4">게시물이 없습니다.</div>
-      ) : (
-        <PostList posts={posts} />
-      )}
+      {content}
       {/* 페이지네이션 컴포넌트 추가 위치 */}
     </div>
   );
