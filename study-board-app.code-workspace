@@ -13,7 +13,16 @@
   "settings": {
     "explorer.compactFolders": false,
     "workbench.tree.indent": 15,
-    "workbench.tree.renderIndentGuides": "always", 
-    "explorer.decorations.colors": true
+    "workbench.tree.renderIndentGuides": "always",
+    "explorer.decorations.colors": true,
+    "todo-tree.general.tags": [
+      "TODO",
+      "FIXME",
+      "BUG",
+      "NOTE",
+      "CHECKME", // 커스텀 키워드
+      "REVIEW", // 커스텀 키워드
+      "IMPORTANT" // 커스텀 키워드
+    ]
   }
 }
