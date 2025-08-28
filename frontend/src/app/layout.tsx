@@ -1,36 +1,32 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-
-// CHECK : vs code 에서 .css 파일 자동완성 기능을 사용하려면?
+import { Inter } from "next/font/google";
 import "./globals.css";
-
 import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
-import { Suspense } from "react";
-import Loading from "./loading";
+import { AppToaster } from "@/hooks/useToast";
 
-// CHECK : metadata 를 작성하는 이유는?
+const inter = Inter({ subsets: ["latin"] });
+
 export const metadata: Metadata = {
   title: "업무 게시판",
-  description: "Next.js + FastAPI 스터디",
+  description: "Acontech study board app",
 };
 
 export default function RootLayout({
   children,
-}: {
+}: Readonly<{
   children: React.ReactNode;
-}) {
+}>) {
   return (
     <html lang="ko">
-      <body className="min-h-screen flex flex-col text-gray-900">
-        {/* 헤더와 푸터를 별도 서버 컴포넌트로 작성함. */}
-        <Header />
-
-        <Suspense fallback={<Loading />}>
-          <main className="flex-1 container mx-auto p-4">{children}</main>
-        </Suspense>
-
-        <Footer />
+      <body className={inter.className}>
+        <AppToaster />
+        <div className="flex flex-col min-h-screen">
+          <Header />
+          <main className="flex-grow">{children}</main>
+          <footer className="bg-gray-100 text-center py-4 text-sm text-gray-500">
+            © 2025 업무_게시판
+          </footer>
+        </div>
       </body>
     </html>
   );

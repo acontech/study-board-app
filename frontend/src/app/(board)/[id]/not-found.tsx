@@ -7,7 +7,8 @@ export default function NotFound() {
         <main className="text-center p-8">
           <h1 className="text-4xl font-extrabold mb-4">404</h1>
           <p className="text-lg text-gray-600 mb-6">
-            요청하신 페이지를 찾을 수 없습니다.(src/app/not-found.tsx)
+            요청하신 페이지를 찾을 수
+            없습니다.(src/app/(board)/[id]/not-found.tsx)
           </p>
           <div className="flex justify-center gap-3">
             <Link href="/" className="px-4 py-2 bg-blue-600 text-white rounded">
