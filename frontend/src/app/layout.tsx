@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/layout/Header";
+
+// REVIEW: 토스트 메세지를 사용하기 위한 라이브러리 추가
 import { AppToaster } from "@/hooks/useToast";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -19,7 +21,10 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body className={inter.className}>
+        {/* REVIEW : 일반적으로 최상위 레이아웃에 한번 포함해서 사용한다. 
+            그리고 클라이언트 컴포넌트에서만 동작한다.(DOM 접근이 필요하기 때문에)*/}
         <AppToaster />
+        
         <div className="flex flex-col min-h-screen">
           <Header />
           <main className="flex-grow">{children}</main>
