@@ -20,9 +20,10 @@
       "FIXME",
       "BUG",
       "NOTE",
-      "CHECKME", // 커스텀 키워드
-      "REVIEW", // 커스텀 키워드
-      "IMPORTANT" // 커스텀 키워드
+      "IDEA",
+      "CHECKME",
+      "REVIEW",
+      "IMPORTANT"
     ]
   }
 }
