@@ -37,7 +37,7 @@ export class ApiError extends Error {
     };
   }
 
-  // IDEA: static 메소드를 사용하여 다양한 방식으로 ApiError 객체 생성 가능.
+  // REVIEW: static 메소드를 사용하여 다양한 방식으로 ApiError 객체 생성 가능.
   static fromStatus(status: number, message: string) {
     return new ApiError(status, message);
   }
@@ -50,7 +50,7 @@ export class ApiError extends Error {
     return new ApiError(status, message, url);
   }
 
-  // IDEA: 타입 가드 문법을 사용하여 error 객체가 ApiError 인지 확인.
+  // REVIEW: 타입 가드 문법을 사용하여 error 객체가 ApiError 인지 확인.
   static isApiError(error: unknown): error is ApiError {
     return error instanceof ApiError;
   }

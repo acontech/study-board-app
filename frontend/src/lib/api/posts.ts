@@ -91,7 +91,7 @@ const mockPosts: PostListItem[] = Array.from({ length: 15 }, (_, i) => ({
 );
 
 export async function getPosts(): Promise<PostListItem[]> {
-  // IDEA: fetch API 사용 시 예외를 throw 하고 상위 호출자에서 처리하도록 개선.
+  // REVIEW: fetch API 사용 시 예외를 throw 하고 상위 호출자에서 처리하도록 개선.
   //  기존에는 return [] 이였지만, 실제 데이터가 없는건지 통신의 오류인지 구분 할 수 없었음.
 
   try {
