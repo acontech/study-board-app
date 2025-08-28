@@ -1,4 +1,6 @@
-import { Post, Comment, PostListItem } from "@/types/post";
+import { Comment, Post, PostListItem } from "@/types/post";
+import { API_ROUTES } from "@/lib/routes";
+import { ApiError } from "@/lib/error/api-error";
 
 // NOTE: 목업 데이터
 const mockComments: Comment[] = Array.from({ length: 5 }, (_, i) => ({
@@ -89,21 +91,32 @@ const mockPosts: PostListItem[] = Array.from({ length: 15 }, (_, i) => ({
 );
 
 export async function getPosts(): Promise<PostListItem[]> {
-  /*
-  // NOTE: 백엔드 연동 시 아래 주석 해제
+  // IDEA: fetch API 사용 시 예외를 throw 하고 상위 호출자에서 처리하도록 개선.
+  //  기존에는 return [] 이였지만, 실제 데이터가 없는건지 통신의 오류인지 구분 할 수 없었음.
+
   try {
     // API 서버의 /api/posts/ 에 요청을 보냅니다.
-    const res = await fetch(`${process.env.API_URL}${API_ROUTES.POSTS}`, { cache: 'no-store' });
+    // const res = await fetch(`${process.env.API_URL}${API_ROUTES.POSTS}`, {
+    //   cache: "no-store",
+    // });
+
+    const res = new Response(null, { status: 500 }); // 임시로 항상 에러 발생 시킴.
+
     if (!res.ok) {
-      console.error('Failed to fetch posts', res.status, res.statusText);
-      return [];
+      // 응답 상태와 메세지를 인자값으로 사용하였는데
+      //  필요에 따라 특정 코드 값을 정의 하여 사용 할 수 있음.
+      throw ApiError.fromStatusAndUrl(
+        res.status,
+        "응답 오류",
+        `${process.env.API_URL}${API_ROUTES.POSTS}`
+      );
     }
+
     return res.json();
-  } catch (error) {
-    console.error('An error occurred while fetching posts:', error);
-    return [];
+  } catch (error: unknown) {
+    throw error;
   }
-  */
+
   // NOTE: 임시 목업 데이터 반환
   console.log("Returning mock posts for main page");
   return Promise.resolve(mockPosts);
