@@ -2,7 +2,7 @@ import { Comment, Post, PostListItem } from "@/types/post";
 import { API_ROUTES } from "@/lib/routes";
 import { ApiError } from "@/lib/error/api-error";
 
-// NOTE: 목업 데이터
+// FIXME: 목업 데이터
 const mockComments: Comment[] = Array.from({ length: 5 }, (_, i) => ({
   id: i + 1,
   content: `정말 좋은 글입니다! ${i + 1}`,
@@ -40,7 +40,7 @@ const mockPost: Post = {
 
 export async function getPost(id: string): Promise<Post | null> {
   /*
-  // NOTE: 백엔드 연동 시 아래 주석 해제
+  // FIXME: 백엔드 연동 시 아래 주석 해제
   try {
     const res = await fetch(`${process.env.API_URL}${API_ROUTES.post(id)}`, { cache: 'no-store' });
     if (!res.ok) return null;
@@ -49,14 +49,14 @@ export async function getPost(id: string): Promise<Post | null> {
     return null;
   }
   */
-  // NOTE: 임시 목업 데이터 반환
+  // FIXME: 임시 목업 데이터 반환
   console.log(`Returning mock post for id: ${id}`);
   return Promise.resolve({ ...mockPost, id: parseInt(id, 10) });
 }
 
 export async function getComments(id: string): Promise<Comment[]> {
   /*
-  // NOTE: 백엔드 연동 시 아래 주석 해제
+  // FIXME: 백엔드 연동 시 아래 주석 해제
   try {
     const res = await fetch(`${process.env.API_URL}${API_ROUTES.comments(id)}`, { cache: 'no-store' });
     if (!res.ok) return [];
@@ -65,14 +65,14 @@ export async function getComments(id: string): Promise<Comment[]> {
     return [];
   }
   */
-  // NOTE: 임시 목업 데이터 반환
+  // FIXME: 임시 목업 데이터 반환
   console.log(`Returning mock comments for post id: ${id}`);
   return Promise.resolve(
     mockComments.map((c) => ({ ...c, post_id: parseInt(id, 10) }))
   );
 }
 
-// NOTE: 목업 데이터
+// FIXME: 목업 데이터
 const mockPosts: PostListItem[] = Array.from({ length: 15 }, (_, i) => ({
   id: i + 1,
   title: `게시물 제목 ${i + 1}`,
@@ -114,12 +114,10 @@ export async function getPosts(): Promise<PostListItem[]> {
 
     // return res.json();
 
-    // NOTE: 임시 목업 데이터 반환
+    // FIXME: 임시 목업 데이터 반환
     console.log("Returning mock posts for main page");
     return Promise.resolve(mockPosts);
   } catch (error: unknown) {
     throw error;
   }
-
-  
 }

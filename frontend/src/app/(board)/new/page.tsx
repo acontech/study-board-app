@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import PostForm from '@/components/posts/PostForm';
-import { useToast } from '@/hooks/useToast';
-import { API_ROUTES, PAGE_ROUTES } from '@/lib/routes';
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import PostForm from "@/components/posts/PostForm";
+import { useToast } from "@/hooks/useToast";
+import { API_ROUTES, PAGE_ROUTES } from "@/lib/routes";
 
 export default function NewPostPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -14,7 +14,7 @@ export default function NewPostPage() {
   const handleSubmit = async (data: { title: string; content: string }) => {
     setIsSubmitting(true);
     /*
-    // NOTE: 백엔드 연동 시 아래 주석 해제
+    // NOFIXMETE: 백엔드 연동 시 아래 주석 해제
     try {
       const response = await fetch(API_ROUTES.POSTS, {
         method: 'POST',
@@ -36,11 +36,11 @@ export default function NewPostPage() {
     }
     */
 
-    // NOTE: 임시 목업 게시물 생성 처리
-    await new Promise(resolve => setTimeout(resolve, 500));
-    console.log('Mock create post with:', data);
+    // FIXME: 임시 목업 게시물 생성 처리
+    await new Promise((resolve) => setTimeout(resolve, 500));
+    console.log("Mock create post with:", data);
     const newMockId = Math.floor(Math.random() * 1000) + 100; // 임의의 새 ID
-    success('게시물이 등록되었습니다.');
+    success("게시물이 등록되었습니다.");
     router.push(PAGE_ROUTES.post(newMockId));
   };
 

@@ -13,7 +13,7 @@ const mockUser: User = {
 // 서버 컴포넌트 또는 API 라우트에서 사용
 export async function getCurrentUser(): Promise<User | null> {
   /*
-  // NOTE: 백엔드 연동 시 아래 주석 해제
+  // FIXME: 백엔드 연동 시 아래 주석 해제
   const cookieStore = cookies();
   const token = cookieStore.get('access_token')?.value;
 
@@ -40,7 +40,7 @@ export async function getCurrentUser(): Promise<User | null> {
     return null;
   }
   */
-  // NOTE: 임시 목업 데이터 반환
+  // FIXME: 임시 목업 데이터 반환
   const cookieStore = await cookies();
   const token = cookieStore.get("access_token")?.value;
   return token ? mockUser : null;
@@ -49,7 +49,7 @@ export async function getCurrentUser(): Promise<User | null> {
 // 미들웨어에서 사용
 export async function getSession(req: NextRequest): Promise<Session | null> {
   /*
-  // NOTE: 백엔드 연동 시 아래 주석 해제
+  // FIXME: 백엔드 연동 시 아래 주석 해제
   const token = req.cookies.get('access_token')?.value;
 
   if (!token) {
@@ -75,7 +75,7 @@ export async function getSession(req: NextRequest): Promise<Session | null> {
     return { user: null };
   }
   */
-  // NOTE: 임시 목업 데이터 반환
+  // FIXME: 임시 목업 데이터 반환
   const token = req.cookies.get("access_token")?.value;
   if (!token) {
     return { user: null };
