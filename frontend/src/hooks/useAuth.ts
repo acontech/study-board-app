@@ -4,6 +4,7 @@ import useSWR from "swr";
 
 // Next.js에서 **양쪽 환경(서버/클라이언트)**에서 동일한 코드로 쿠키를 다룰 수 있는 라이브러리
 import { getCookie } from "cookies-next";
+import { useAuthContext } from "@/app/(auth)/login/test/AuthContext";
 
 const mockUser: User = {
   id: 1,
@@ -31,6 +32,10 @@ export function useAuth() {
   // 기본적으로 전역 캐시 저장소는 1개 이기 때문에 다수의 함수에서 swr 을 사용하더라도
   // 동일한 key 를 사용하면 같은 데이터를 공유하게 된다.
 
+  // key 값은 배열 형태로 지정 할 수 있는데 [key1, key2] 와 같은 형식을 권장한다.
+  //  key 값은 swr 내부에서 JSON.stringify 처리한 값으로 관리되기 되기 때문에
+  //  key 값이 객체이거나 배열인 경우 주의가 필요하다.
+
   // 만약 페이지 별로 별도의 캐시 저장소를 사용하고 싶다면 SWRConfig 컴포넌트의
   // Provider 를 사용하여 별도의 캐시 저장소를 생성할 수 있다.
   // 이 경우에는 동일한 key 를 사용하더라도 서로 다른 데이터를 가지게 된다.
@@ -45,11 +50,14 @@ export function useAuth() {
   | `mutate`    | 캐시 갱신 및 재검증 함수 | 낙관적 업데이트, 강제 최신화 |
 
   */
+
+  // NOTE: 컨텍스트를 통해 저장된 액세스 토큰 값
+  const { accessToken } = useAuthContext();
+
   const { data, error, isLoading, mutate } = useSWR<User | null>(
-    API_ROUTES.ME, // 키는 유지하여 다른 곳에서 mutate 호출 시 재검증 유도
+    API_ROUTES.ME,
     () => {
-      // 실제 fetch 대신 쿠키 유무에 따라 목업 데이터 반환
-      const token = getCookie("access_token");
+      const token = accessToken;
       return token ? mockUser : null;
     },
     {
