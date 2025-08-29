@@ -21,7 +21,7 @@ export default function LoginPage() {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // FIXME: 실제 
+    // FIXME: 실제 로그인 처리 백엔드 호출 처리 필요.
 
 
     // FIXME: 임시 목업 로그인 처리

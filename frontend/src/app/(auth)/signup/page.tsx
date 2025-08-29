@@ -20,6 +20,11 @@ export default function SignupPage() {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
+
+    // NOTE: [name]: value 는 name 값을 key 로 사용해서 value 값을 설정한다는 의미.
+    //  예시. 
+    //  name = "email", value = "abc@test.com" 이면
+    //  email: "abc@test.com" 이렇게 처리 된다는 얘기.
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
