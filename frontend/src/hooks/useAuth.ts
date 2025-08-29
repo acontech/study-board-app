@@ -1,7 +1,6 @@
-import useSWR from "swr";
 import { API_ROUTES } from "@/lib/routes";
-import fetcher from "@/lib/api";
 import { User } from "@/types/auth";
+import useSWR from "swr";
 
 // Next.js에서 **양쪽 환경(서버/클라이언트)**에서 동일한 코드로 쿠키를 다룰 수 있는 라이브러리
 import { getCookie } from "cookies-next";
@@ -28,6 +27,17 @@ export function useAuth() {
   // REVIEW: useSWR 은 데이터 패칭 처리와 캐싱 기능을 가지고 있다.
   //  mutate() 함수 호출을 통해서 캐시를 갱신하는 등의 기능을 실행 할 수 있다.
 
+  // swr 이 호출되면 전역 캐시 저장소가 생성되고, 이 저장소에 key 별로 데이터가 저장된다.
+  // 기본적으로 전역 캐시 저장소는 1개 이기 때문에 다수의 함수에서 swr 을 사용하더라도
+  // 동일한 key 를 사용하면 같은 데이터를 공유하게 된다.
+
+  // 만약 페이지 별로 별도의 캐시 저장소를 사용하고 싶다면 SWRConfig 컴포넌트의
+  // Provider 를 사용하여 별도의 캐시 저장소를 생성할 수 있다.
+  // 이 경우에는 동일한 key 를 사용하더라도 서로 다른 데이터를 가지게 된다.
+
+  // 필요하다면 전역 캐시 저장소에 직접 접근도 가능하다.(권장하지는 않음)
+  //  예를 들어 로그아웃 할때 캐시 저장소를 초기화 하는 등의 작업이 필요한 경우 사용가능.
+
   /*
   | `data`      | 요청 성공 시 응답 데이터 | 화면에 보여줄 실제 데이터   |
   | `error`     | 요청 실패 시 에러 객체   | 에러 메시지/리다이렉트 처리  |
@@ -49,7 +59,7 @@ export function useAuth() {
   );
 
   return {
-    user: data,
+    data,
     error,
     isLoading,
     isLoggedIn: !!data,
