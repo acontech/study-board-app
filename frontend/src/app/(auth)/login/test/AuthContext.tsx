@@ -19,10 +19,15 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 // NOTE: 컨텍스트 제공을 위한 프로바이더 생성
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [accessToken, setAccessToken] = useState<string | null>(null);
-  const [refreshToken, setRefreshToken] = useState<string | null>(null);
+
+  // NOTE: useMemo() 를 사용하여 불필요한 리렌더링을 방지한다.
+  const value = useMemo(() => ({ accessToken, setAccessToken }), [accessToken, setAccessToken]);
 
   return (
-    <AuthContext.Provider value={{ accessToken, setAccessToken }}>
+    // NOTE: value 값을 {accessToken, setAccessToken} 과 같이 객체 리터럴을 직접 넣으면
+    //  매번 새로운 참조가 생겨 리렌더링이 발생하기 때문에 useMemo를 사용하여
+    //  실제 값이 변경 되었을때만 렌더링 되도록 처리.
+    <AuthContext.Provider value={value}>
       {children}
     </AuthContext.Provider>
   );

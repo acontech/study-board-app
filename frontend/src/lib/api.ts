@@ -12,7 +12,7 @@ const getApiUrl = () => {
 const API_URL = getApiUrl();
 
 interface FeatchError extends Error {
-  info?: any;
+  info?: unknown;
   status?: number;
 }
 
