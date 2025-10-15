@@ -1,6 +1,6 @@
 "use client";
 
-import React, { createContext, useState } from "react";
+import React, { createContext, useState, useMemo } from "react";
 
 // NOTE: 전역 관리를 위한 토큰 타입 정의
 interface AuthContextType {
