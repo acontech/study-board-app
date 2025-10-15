@@ -1,20 +1,30 @@
-"""
-기능:
-    서버 실행시 메인 지점
-"""
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware # CORS 미들웨어 임포트
 from app.api.test import test
+from app.api.posts import posts # posts 라우터 모듈 임포트
+from app.api.users import users # users 라우터 모듈 임포트
+from app.api.comments import comments # comments 라우터 모듈 임포트
 
 app = FastAPI()
 
-# /app/api/test.py 라우터를 메인 앱에 추가(API 호출이 가능해 진다)
+# CORS 설정
+origins = [
+    "http://localhost:3000",  # 프론트엔드 URL
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 app.include_router(test.router)
+app.include_router(posts.router)
+app.include_router(users.router) # users 라우터 객체 포함
+app.include_router(comments.router) # comments 라우터 객체 포함
 
 @app.get("/")
 def hello():
-    """_summary_
-
-    Returns:
-        _type_: 테스트를 위한 기본값
-    """
     return {"message": "Hello, FastAPI!"}

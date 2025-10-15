@@ -1,7 +1,7 @@
 from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker
 from sqlalchemy.orm import declarative_base
 
-DATABASE_URL = "mysql+asyncmy://myuser:mypassword@localhost:3306/mydb"
+DATABASE_URL = "mysql+asyncmy://acontech:a4275426@localhost:3306/studyboard"
 
 # DB와 실제 연결을 관리하는 엔진 생성
 engine = create_async_engine(
